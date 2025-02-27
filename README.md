@@ -24,3 +24,7 @@ by LviatYi
 - [x] **管线数据** 管道化数据分析，直接构建 Excel 行。直接粘贴到目标文件。
 - [x] **强取豪夺** 参考需求侧工作流，分析节点树，识别所有参选节点。
 - [ ] **智能合并** 提供基于约定主键的数据合并。
+
+[JetbrainsMonoNerdFont]:https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/JetBrainsMono.zip@fallbackFont
+
+[SarasaMonoSC]:https://github.com/be5invis/Sarasa-Gothic/releases/download/v0.41.6/sarasa-gothic-ttf-0.41.6.7z
