@@ -1,0 +1,13 @@
+### Example user template
+
+# IntelliJ project files
+.idea
+*.iml
+out
+gen
+
+# Typescript
+
+dist
+package-lock.json
+node_modules
