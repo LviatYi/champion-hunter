@@ -9,7 +9,7 @@ const output = fs.createWriteStream(`champion-hunter-v${version}.zip`);
 const archive = archiver("zip", {zlib: {level: 9}});
 
 output.on("close", () => {
-    console.log(`✅ champion-hunter.zip created. Size of: ${archive.pointer()} bytes`);
+    console.log(`✅ champion-hunter-v${version}.zip created. Size of: ${archive.pointer()} bytes`);
 });
 
 archive.on("error", (err) => {
