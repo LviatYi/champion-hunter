@@ -71,7 +71,7 @@ window.onload = (_) => {
 
 window.onmessage = async (event) => {
     const {type, text, itemNameList} = event.data.pluginMessage;
-    if (type === "copyToClipboard") {
+    if (type === "update-export-str") {
         try {
             console.log(Constant.UI_RENDER_TEXT_AREA, text);
             textarea.value = text;

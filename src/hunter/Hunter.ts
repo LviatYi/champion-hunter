@@ -31,7 +31,7 @@ export function hunter() {
         .join("\n");
 
     figma.ui.postMessage({
-        type: "copyToClipboard",
+        type: "update-export-str",
         text: content,
         itemNameList: lineStructures.map((struct) => struct.name),
     });
