@@ -1,13 +1,16 @@
 {
   "name": "champion-hunter",
-  "version": "1.0.0",
+  "version": "0.8.2",
   "description": "Your Figma Plugin",
   "main": "./dist/code.js",
   "scripts": {
     "build": "webpack",
     "lint": "eslint --ext .ts,.tsx --ignore-pattern node_modules .",
     "lint:fix": "eslint --ext .ts,.tsx --ignore-pattern node_modules --fix .",
-    "watch": "npm run build -- --watch"
+    "watch": "npm run build -- --watch",
+    "pack": "node scripts/pack.js",
+    "update-version": "node scripts/LRpdR_update_version.js",
+    "prepack": "npm run build && npm run update-version && npm install archiver --save-dev"
   },
   "author": "",
   "license": "",
@@ -16,6 +19,7 @@
     "@figma/plugin-typings": "*",
     "@typescript-eslint/eslint-plugin": "^6.12.0",
     "@typescript-eslint/parser": "^6.12.0",
+    "archiver": "^7.0.1",
     "copy-webpack-plugin": "^12.0.2",
     "eslint": "^8.54.0",
     "html-inline-script-webpack-plugin": "^3.2.1",
