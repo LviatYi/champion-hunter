@@ -4,7 +4,7 @@
 // full browser environment (See https://www.figma.com/plugin-docs/how-plugins-run).
 
 // Runs this code if the plugin is run in Figma
-import { hunter } from "./hunter/Hunter";
+import { hunter, UpdatableField, updateField } from "./hunter/Hunter";
 import Constant from "./config/Constant";
 
 if (figma.editorType === "figma") {
@@ -15,6 +15,10 @@ if (figma.editorType === "figma") {
     figma.ui.onmessage = (message) => {
         if (message.type === "close-ui") {
             figma.closePlugin(Constant.PLUGIN_FINISHED_BY_UI_CLOSED);
+        } else if (message.type === "update") {
+            console.log(Constant.HUNTER_RECEIVE_UPDATE, message.data);
+            const {type, index, newValue} = message.data as { type: UpdatableField, index: number, newValue: string };
+            updateField(type, index, newValue);
         }
     };
 

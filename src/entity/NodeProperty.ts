@@ -40,7 +40,7 @@ export interface TextNodeProperty extends NodeProperty {
     hunterType: "normalText" | "boldText";
     color?: string;
     boldText?: boolean;
-    text?: string;
+    text: string;
     showBacking: boolean;
     textAlignH?: TextAlignH;
     textAlignV?: TextAlignV;

@@ -17,16 +17,23 @@ export default class Constant {
     public static readonly UI_EXEC_COPY_COMMAND = "Champion Hunter | UI | copy command executed.";
     public static readonly UI_CLEAR_TEXT_AREA_SELECTION = "Champion Hunter | UI | clear range.";
     public static readonly UI_SET_TEXT_AREA_SELECTION = "Champion Hunter | UI | set range: ";
+    public static readonly UI_SET_NAME_FIELD = "Champion Hunter | UI | Name updated: ";
+    public static readonly UI_SET_TEXT_FIELD = "Champion Hunter | UI | Text updated: ";
+    public static readonly UI_SET_FIELD_FAILED = "Champion Hunter | UI | Field update failed. Value should not be null or empty.";
+    public static readonly UI_REPORT_UPDATE = "Champion Hunter | UI | Report updated.";
+    public static readonly UI_NO_ITEM_SELECTED_WHEN_COPY_SELECTION = "Champion Hunter | UI | Copy selection failed. No item selected.";
 
     public static readonly HUNTER_CURRENT_SELECT_COUNT = "Champion Hunter | Hunter | current select count: ";
     public static readonly HUNTER_CURRENT_SELECT = "Champion Hunter | Hunter | current select: ";
     public static readonly HUNTER_SELECT_TARGET_NODE = "Champion Hunter | Hunter | collect ";
     public static readonly HUNTER_AFTER_SWEEP_NET = "Champion Hunter | Hunter | sweep net and get ";
+    public static readonly UPDATE_NODE_FIELD_FAILED_VALUE_INVALID = "Champion Hunter | Hunter | Update node field failed. Value is null or empty.";
+    public static readonly UPDATE_NODE_FIELD_FAILED_NODE_NOT_FOUND = "Champion Hunter | Hunter | Update node field failed. Node is not found.";
+    public static readonly HUNTER_RECEIVE_UPDATE = "Champion Hunter | Hunter | Received updated: ";
 
     public static readonly UI_TEXT_COPY_SELECTION = "Copy Selection to Clipboard (Ctrl+C)";
     public static readonly UI_TEXT_COPY_ALL = "Copy All to Clipboard";
 
-    public static readonly COPY_TO_CLIPBOARD_FINISHED = "✅ Text copied to clipboard!";
     public static readonly NO_SELECT_NODE_WARNING = "⚠️ Please select a node.";
     public static readonly MIXED_TEXT_NODE = "TextNode can have a number of different styles of text.";
 }
