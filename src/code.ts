@@ -18,5 +18,7 @@ if (figma.editorType === "figma") {
         }
     };
 
+    figma.ui.postMessage({type: "readClipboard"});
+
     hunter();
 }

@@ -85,6 +85,14 @@ window.onmessage = async (event) => {
             postErrorMessage(error);
         }
     }
+    if (type === "readClipboard") {
+        try {
+            const text = await navigator.clipboard.readText();
+            console.log("try to read text from clipboard: ", text);
+        } catch (error) {
+            console.error(error);
+        }
+    }
 };
 
 function postErrorMessage(message: string | unknown) {
