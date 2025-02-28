@@ -20,7 +20,6 @@ by [LviatYi](mailto:LviatYi@foxmail.com)
 
 ### Unreleased
 
-- [ ] **FEAT** 剪切板抓取及数据合并。
 - [ ] **FEAT** 补全文档，添加教程信息。
 
 ### v0.8.4
