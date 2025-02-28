@@ -1,0 +1,49 @@
+name: Release Champion Hunter
+
+on:
+  push:
+    branches:
+      - release/**
+    tags:
+      - v*
+
+jobs:
+  build_and_release:
+    name: Build and Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run pack script
+        run: npm run pack-only
+
+      - name: Find ZIP File
+        id: find_zip
+        run: |
+          ZIP_FILE="champion-hunter-v${VERSION}.zip"
+          if [ ! -f "$ZIP_FILE" ]; then
+            echo "❌ Error: File $ZIP_FILE not found!"
+            exit 1
+          fi
+          echo "ZIP_PATH=$ZIP_FILE" >> $GITHUB_ENV
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ env.VERSION }}
+          name: Champion Hunter v${{ env.VERSION }}
+          body: |
+            🎉 New release: v${{ env.VERSION }}
+          files: ${{ env.ZIP_PATH }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

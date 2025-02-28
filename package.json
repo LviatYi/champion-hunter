@@ -1,16 +1,18 @@
 {
   "name": "champion-hunter",
-  "version": "0.8.2",
-  "description": "Your Figma Plugin",
+  "version": "0.8.3",
+  "description": "An intelligent asset governance solution for the Figma ecosystem.",
   "main": "./dist/code.js",
   "scripts": {
     "build": "webpack",
     "lint": "eslint --ext .ts,.tsx --ignore-pattern node_modules .",
     "lint:fix": "eslint --ext .ts,.tsx --ignore-pattern node_modules --fix .",
     "watch": "npm run build -- --watch",
-    "pack": "node scripts/pack.js",
     "update-version": "node scripts/LRpdR_update_version.js",
-    "prepack": "npm run build && npm run update-version && npm install archiver --save-dev"
+    "prepack": "npm run build && npm run update-version",
+    "pack": "npm install archiver --save-dev && node scripts/pack.js",
+    "prepack-only": "npm run build",
+    "pack-only": "npm install archiver --save-dev && node scripts/pack.js"
   },
   "author": "",
   "license": "",
