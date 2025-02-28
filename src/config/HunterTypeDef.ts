@@ -39,7 +39,7 @@ export type HunterTypeDefInfo = {
  * Champion Hunter 支持的导出模式定义.
  */
 export const HunterTypeDef: {
-    [key in "group" | "normalText" | "boldText" | "image" | "store"]: HunterTypeDefInfo
+    [key in "group" | "normalText" | "boldText" | "image" | "frame" | "store"]: HunterTypeDefInfo
 } = {
     group: {
         humanType: "Text",
@@ -55,6 +55,10 @@ export const HunterTypeDef: {
         stanzaBinding: "textbinding_BOLDTEXT",
     },
     image: {
+        humanType: "Text",
+        propExportTo: PropExportToType.Banner,
+    },
+    frame: {
         humanType: "Text",
         propExportTo: PropExportToType.Banner,
     },

@@ -9,12 +9,8 @@ export interface NodeProperty {
     height: number;
 }
 
-export interface GroupNodeProperty extends NodeProperty {
-    hunterType: "group";
-}
-
-export interface RectangleNodeProperty extends NodeProperty {
-    hunterType: "image";
+export interface ImageLikeNodeProperty extends NodeProperty {
+    hunterType: "image" | "group" | "frame";
 }
 
 export interface InstanceNodeProperty extends NodeProperty {
@@ -48,8 +44,6 @@ export interface TextNodeProperty extends NodeProperty {
     showBacking: boolean;
     textAlignH?: TextAlignH;
     textAlignV?: TextAlignV;
-    x: number;
-    y: number;
     resizeType: ResizeType;
     fontSize: number;
     multiline: boolean;

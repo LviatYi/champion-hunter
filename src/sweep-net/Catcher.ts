@@ -1,9 +1,7 @@
 import {
-    GroupNodeProperty,
     InstanceNodeProperty,
     NodeProperty,
-    RectangleNodeProperty,
-    ResizeType,
+    ImageLikeNodeProperty,
     TextAlignH, TextAlignV,
     TextNodeProperty,
 } from "../entity/NodeProperty";
@@ -23,6 +21,9 @@ export function catchProperties(node: SceneNode): NodeProperty | undefined {
         case "INSTANCE":
             propertyObj = catchStoreNode(node);
             break;
+        case "FRAME":
+            propertyObj = catchFrameNode(node);
+            break;
         case "GROUP":
             propertyObj = catchGroupNode(node);
             break;
@@ -32,43 +33,63 @@ export function catchProperties(node: SceneNode): NodeProperty | undefined {
             return undefined;
     }
 
+    propertyObj.x = Math.round(propertyObj.x);
+    propertyObj.y = Math.round(propertyObj.y);
+    propertyObj.width = Math.round(propertyObj.width);
+    propertyObj.height = Math.round(propertyObj.height);
+    
     return propertyObj;
 }
 
-export function catchRectangleNode(node: RectangleNode): RectangleNodeProperty {
+function catchRectangleNode(node: RectangleNode): ImageLikeNodeProperty {
+    const position = calNodeAbsolutePosition(node);
     return {
         hunterType: "image",
         name: node.name,
-        x: node.x,
-        y: node.y,
+        x: position.x,
+        y: position.y,
         width: node.width,
         height: node.height,
     };
 }
 
-export function catchStoreNode(node: InstanceNode): InstanceNodeProperty {
+function catchStoreNode(node: InstanceNode): InstanceNodeProperty {
+    const position = calNodeAbsolutePosition(node);
     return {
         hunterType: "store",
         name: node.name,
-        x: node.x + node.width / 2,
-        y: node.y + node.height / 2,
+        x: position.x + node.width / 2,
+        y: position.y + node.height / 2,
         width: node.width,
         height: node.height,
     };
 }
 
-export function catchGroupNode(node: GroupNode): GroupNodeProperty {
+function catchFrameNode(node: FrameNode): ImageLikeNodeProperty {
+    const position = calNodeAbsolutePosition(node);
+    return {
+        hunterType: "frame",
+        name: node.name,
+        x: position.x,
+        y: position.y,
+        width: node.width,
+        height: node.height,
+    };
+}
+
+function catchGroupNode(node: GroupNode): ImageLikeNodeProperty {
+    const position = calNodeAbsolutePosition(node);
     return {
         hunterType: "group",
         name: node.name,
-        x: node.x,
-        y: node.y,
+        x: position.x,
+        y: position.y,
         width: node.width,
         height: node.height,
     };
 }
 
-export function catchTextNode(node: TextNode): TextNodeProperty {
+function catchTextNode(node: TextNode): TextNodeProperty {
     let color: string | FallbackError<string> | undefined = catchTextNodeColor(node);
     if (color instanceof FallbackError) {
         console.warn(`TextNode: ${node.name} | ` + color.message);
@@ -97,14 +118,7 @@ export function catchTextNode(node: TextNode): TextNodeProperty {
         }
     }
 
-    let resizeType: ResizeType | FallbackError<ResizeType> | undefined = catchTextNodeResizeType(node);
-    if (resizeType instanceof FallbackError) {
-        if (resizeType.fallbackValue != undefined) {
-            resizeType = resizeType.fallbackValue;
-        } else {
-            resizeType = undefined;
-        }
-    }
+    const position = calNodeAbsolutePosition(node);
 
     return {
         hunterType: boldText ? "boldText" : "normalText",
@@ -115,17 +129,17 @@ export function catchTextNode(node: TextNode): TextNodeProperty {
         showBacking: DefaultValueConfig.SHOW_BACKING,
         textAlignH: catchTextNodeAlignmentH(node),
         textAlignV: catchTextNodeAlignmentV(node),
-        x: node.x,
-        y: node.y,
+        x: position.x,
+        y: position.y,
         height: node.height,
         width: node.width,
-        resizeType: resizeType ?? DefaultValueConfig.RESIZE_TYPE,
+        resizeType: DefaultValueConfig.RESIZE_TYPE,
         fontSize: fontSize ?? DefaultValueConfig.FONT_SIZE,
         multiline: DefaultValueConfig.MULTILINE,
     };
 }
 
-export function catchTextNodeAlignmentH(node: TextNode): TextAlignH | undefined {
+function catchTextNodeAlignmentH(node: TextNode): TextAlignH | undefined {
     switch (node.textAlignHorizontal) {
         case "LEFT":
             return TextAlignH.Left;
@@ -138,7 +152,7 @@ export function catchTextNodeAlignmentH(node: TextNode): TextAlignH | undefined 
     }
 }
 
-export function catchTextNodeAlignmentV(node: TextNode): TextAlignV | undefined {
+function catchTextNodeAlignmentV(node: TextNode): TextAlignV | undefined {
     switch (node.textAlignVertical) {
         case "TOP":
             return undefined;
@@ -149,7 +163,7 @@ export function catchTextNodeAlignmentV(node: TextNode): TextAlignV | undefined 
     }
 }
 
-export function catchTextNodeColor(node: TextNode): string | FallbackError<string> {
+function catchTextNodeColor(node: TextNode): string | FallbackError<string> {
     if (!Array.isArray(node.fills) ||
         node.fills.length == 0) {
         return new FallbackError("No fill color found.");
@@ -162,7 +176,7 @@ export function catchTextNodeColor(node: TextNode): string | FallbackError<strin
     return figmaColorToHex(node.fills[0].color);
 }
 
-export function catchTextNodeIsBold(node: TextNode): boolean | FallbackError<boolean> {
+function catchTextNodeIsBold(node: TextNode): boolean | FallbackError<boolean> {
     let font = node.fontName;
     if (typeof font === "object") {
         return font.style.toLowerCase() === "bold";
@@ -178,7 +192,7 @@ export function catchTextNodeIsBold(node: TextNode): boolean | FallbackError<boo
     return error;
 }
 
-export function catchTextNodeFontSize(node: TextNode): number | FallbackError<number> {
+function catchTextNodeFontSize(node: TextNode): number | FallbackError<number> {
     let size = node.fontSize;
     if (typeof size === "number") {
         return size;
@@ -194,12 +208,50 @@ export function catchTextNodeFontSize(node: TextNode): number | FallbackError<nu
     return error;
 }
 
-export function catchTextNodeResizeType(node: TextNode): ResizeType | FallbackError<ResizeType> {
-    node.textAutoResize;
-    return new FallbackError("Not implemented.");
+function calNodeAbsolutePosition(node: DimensionAndPositionMixin): { x: number, y: number } {
+    const ancestors = getAllAncestorFrameNode(node as SceneNode);
+
+    let x = node.x;
+    let y = node.y;
+    for (let i = 0; i < ancestors.length; i++) {
+        if (i == ancestors.length - 1) break;
+
+        const ancestor = ancestors[i];
+        x += ancestor.x;
+        y += ancestor.y;
+    }
+
+    return {x, y};
 }
 
-export function figmaColorToHex(color: { r: number, g: number, b: number }): string {
+const getAllAncestorFrameNodeCache = new Map<SceneNode, FrameNode[]>();
+
+function getAllAncestorFrameNode(leap: SceneNode): FrameNode[] {
+    let ancestors: FrameNode[] | undefined = getAllAncestorFrameNodeCache.get(leap);
+    if (ancestors != undefined) {
+        return ancestors;
+    } else {
+        ancestors = [];
+    }
+
+    let current = leap;
+    while (current.parent != null && current.parent.type !== "PAGE") {
+        current = current.parent as SceneNode;
+        if (current.type === "FRAME") {
+            ancestors.push(current);
+        }
+        const query = getAllAncestorFrameNodeCache.get(current);
+        if (query != undefined) {
+            ancestors.push(...query);
+            break;
+        }
+    }
+
+    getAllAncestorFrameNodeCache.set(leap, ancestors);
+    return ancestors;
+}
+
+function figmaColorToHex(color: { r: number, g: number, b: number }): string {
     const r = Math.round(color.r * 255);
     const g = Math.round(color.g * 255);
     const b = Math.round(color.b * 255);
