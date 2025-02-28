@@ -52,7 +52,7 @@ by [LviatYi](mailto:LviatYi@foxmail.com)
 - [x] **博采众长** 与 Figma API 深度合作，萃取所有潜在有效信息加以分析利用。
 - [x] **管线数据** 管道化数据分析，直接构建 Excel 行。直接粘贴到目标文件。
 - [x] **强取豪夺** 参考需求侧工作流，分析节点树，识别所有参选节点。
-- [ ] **次生枝蔓** 单项预览与调整窗口，支持同步改动。
+- [x] **次生枝蔓** 单项预览与调整窗口，支持同步改动。
 
 [JetbrainsMonoNerdFont]:https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/JetBrainsMono.zip@fallbackFont
 
