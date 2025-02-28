@@ -21,6 +21,8 @@ by [LviatYi](mailto:LviatYi@foxmail.com)
 ### Unreleased
 
 - [ ] **FEAT** 补全文档，添加教程信息。
+- [ ] **FEAT** 监听 Figma 事件，实现选区更新。
+- [ ] **FEAT** 隐藏导出预览文本窗口。添加单项预览与调整窗口，支持同步改动。
 
 ### v0.8.4
 
@@ -47,7 +49,7 @@ by [LviatYi](mailto:LviatYi@foxmail.com)
 - [x] **博采众长** 与 Figma API 深度合作，萃取所有潜在有效信息加以分析利用。
 - [x] **管线数据** 管道化数据分析，直接构建 Excel 行。直接粘贴到目标文件。
 - [x] **强取豪夺** 参考需求侧工作流，分析节点树，识别所有参选节点。
-- [ ] **智能合并** 提供基于约定主键的数据合并。
+- [ ] **次生枝蔓** 单项预览与调整窗口，支持同步改动。
 
 [JetbrainsMonoNerdFont]:https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/JetBrainsMono.zip@fallbackFont
 
