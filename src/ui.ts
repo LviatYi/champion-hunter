@@ -1,4 +1,7 @@
 import Constant from "./config/Constant";
+import EventName from "./config/EventName";
+import ExcelLineStruct from "./entity/ExcelLineStruct";
+import { NodeProperty } from "./entity/NodeProperty";
 
 console.log(Constant.UI_LOADING);
 
@@ -70,11 +73,19 @@ window.onload = (_) => {
 };
 
 window.onmessage = async (event) => {
-    const {type, text, itemNameList} = event.data.pluginMessage;
-    if (type === "update-export-str") {
+    const {type, data} = event.data.pluginMessage;
+    const items = data as NodeProperty[];
+    if (type === EventName.UPDATE_USABLE_ITEMS) {
         try {
-            console.log(Constant.UI_RENDER_TEXT_AREA, text);
-            textarea.value = text;
+            console.log(Constant.UI_RENDER_TEXT_AREA, items);
+            const lineStructures = items
+                .map(item => new ExcelLineStruct(item));
+            lineStructures.forEach(lineStructure => console.log(lineStructure.toString()));
+
+            textarea.value = lineStructures
+                .map(struct => struct.toString())
+                .join("\n");
+            const itemNameList = items.map(item => item.name);
             if (itemNameList != null && Array.isArray(itemNameList)) {
                 console.log(Constant.UI_RENDER_EXPORT_LIST, itemNameList);
                 renderExportList(itemNameList);
