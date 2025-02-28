@@ -4,9 +4,9 @@ import { catchProperties } from "./Catcher";
 /**
  * 可用节点类型.
  */
-type UsableNode = TextNode | RectangleNode | InstanceNode | GroupNode;
+export type UsableNode = TextNode | RectangleNode | InstanceNode | GroupNode | FrameNode;
 
-const UsableNodeTypes = ["TEXT", "RECTANGLE", "INSTANCE", "GROUP"];
+const UsableNodeTypes = ["TEXT", "RECTANGLE", "INSTANCE", "GROUP", "FRAME"];
 
 type TargetNode = GroupNode | UsableNode;
 
@@ -52,15 +52,15 @@ export function sweepNet(candidates: ReadonlyArray<TargetNode>, addTo?: NodeProp
 
 /**
  * 从 GroupNode 中获取所有可用节点.
- * @param {SceneNode} root
+ * @param {UsableNode} root
  * @param {boolean} force 是否强制添加不可见节点. 仅作用于首个节点.
  * @param {UsableNode[]} addTo
  * @returns {UsableNode[]}
  */
-function getUsableNodesIncludeChildren(root: SceneNode, force: boolean = false, addTo?: UsableNode[]): UsableNode[] {
+function getUsableNodesIncludeChildren(root: UsableNode, force: boolean = false, addTo?: UsableNode[]): UsableNode[] {
     if (addTo == null) addTo = [];
 
-    const candidates = [root];
+    const candidates: SceneNode[] = [root];
     while (candidates.length > 0) {
         const p = candidates.pop();
         if (p == null) continue;

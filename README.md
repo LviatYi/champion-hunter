@@ -6,7 +6,7 @@ Champion Hunter 是一款面向 Figma 生态的智能资产治理解决方案。
 通过深度打通设计工具链路，实现工程资产数据的智能化解析与重组。  
 最终赋能 UX 团队在跨平台交付场景中实现沉浸式采样体验与一键式可视化智控导出，优化整体工作流体验，完成从设计价值挖掘到工程效能转化的闭环。
 
-v0.8.3  
+v0.8.4  
 by [LviatYi](mailto:LviatYi@foxmail.com)
 
 阅读该文档时，推荐安装以下字体：
@@ -22,6 +22,10 @@ by [LviatYi](mailto:LviatYi@foxmail.com)
 
 - [ ] **FEAT** 剪切板抓取及数据合并。
 - [ ] **FEAT** 补全文档，添加教程信息。
+
+### v0.8.4
+
+- **FIX** 修复 Frame 未包含于 UsableNode，使用 UsableNode 替换 SceneNode。该错误曾导致 Frame 无导出。
 
 ### v0.8.3
 

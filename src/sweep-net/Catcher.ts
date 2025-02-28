@@ -8,8 +8,9 @@ import {
 import { DefaultValueConfig } from "../config/GlobalConfig";
 import { FallbackError } from "../entity/FallbackError";
 import Constant from "../config/Constant";
+import { UsableNode } from "./SweepNet";
 
-export function catchProperties(node: SceneNode): NodeProperty | undefined {
+export function catchProperties(node: UsableNode): NodeProperty | undefined {
     let propertyObj: NodeProperty;
     switch (node.type) {
         case "TEXT":
@@ -208,7 +209,7 @@ function catchTextNodeFontSize(node: TextNode): number | FallbackError<number> {
 }
 
 function calNodeAbsolutePosition(node: DimensionAndPositionMixin): { x: number, y: number } {
-    const ancestors = getAllAncestorFrameNode(node as SceneNode);
+    const ancestors = getAllAncestorFrameNode(node as UsableNode);
 
     let x = node.x;
     let y = node.y;
@@ -223,9 +224,9 @@ function calNodeAbsolutePosition(node: DimensionAndPositionMixin): { x: number, 
     return {x, y};
 }
 
-const getAllAncestorFrameNodeCache = new Map<SceneNode, FrameNode[]>();
+const getAllAncestorFrameNodeCache = new Map<UsableNode, FrameNode[]>();
 
-function getAllAncestorFrameNode(leap: SceneNode): FrameNode[] {
+function getAllAncestorFrameNode(leap: UsableNode): FrameNode[] {
     let ancestors: FrameNode[] | undefined = getAllAncestorFrameNodeCache.get(leap);
     if (ancestors != undefined) {
         return ancestors;
@@ -235,7 +236,7 @@ function getAllAncestorFrameNode(leap: SceneNode): FrameNode[] {
 
     let current = leap;
     while (current.parent != null && current.parent.type !== "PAGE") {
-        current = current.parent as SceneNode;
+        current = current.parent as UsableNode;
         if (current.type === "FRAME") {
             ancestors.push(current);
         }
