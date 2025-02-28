@@ -19,4 +19,8 @@ if (figma.editorType === "figma") {
     };
 
     hunter();
+
+    figma.on("selectionchange", () => {
+        hunter();
+    });
 }

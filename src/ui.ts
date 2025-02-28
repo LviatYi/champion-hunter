@@ -88,6 +88,7 @@ window.onmessage = async (event) => {
             const itemNameList = items.map(item => item.name);
             if (itemNameList != null && Array.isArray(itemNameList)) {
                 console.log(Constant.UI_RENDER_EXPORT_LIST, itemNameList);
+                console.log("exportList.innerHTML: ", exportList?.innerHTML ?? "");
                 renderExportList(itemNameList);
             }
             textarea.select();
@@ -117,7 +118,7 @@ function execCopy(textarea: HTMLTextAreaElement, selectAll: boolean) {
 
 function renderExportList(items: string[]) {
     if (exportList != null) {
-        exportList.innerHTML += items.map((item, index) =>
+        exportList.innerHTML = items.map((item, index) =>
             `<div class="export-list-item" data-index="${index}">${item}</div>`,
         ).join("");
     } else {
