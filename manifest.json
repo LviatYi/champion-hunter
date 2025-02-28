@@ -1,6 +1,7 @@
 {
   "name": "champion-hunter",
   "api": "1.0.0",
+  "id": "1477245068830597943",
   "main": "dist/code.js",
   "capabilities": [],
   "enableProposedApi": false,
