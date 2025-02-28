@@ -7,7 +7,7 @@ import {
 } from "../entity/NodeProperty";
 import { DefaultValueConfig } from "../config/GlobalConfig";
 import { FallbackError } from "../entity/FallbackError";
-import LogConstant from "../config/LogConstant";
+import Constant from "../config/Constant";
 
 export function catchProperties(node: SceneNode): NodeProperty | undefined {
     let propertyObj: NodeProperty;
@@ -37,7 +37,7 @@ export function catchProperties(node: SceneNode): NodeProperty | undefined {
     propertyObj.y = Math.round(propertyObj.y);
     propertyObj.width = Math.round(propertyObj.width);
     propertyObj.height = Math.round(propertyObj.height);
-    
+
     return propertyObj;
 }
 
@@ -92,7 +92,6 @@ function catchGroupNode(node: GroupNode): ImageLikeNodeProperty {
 function catchTextNode(node: TextNode): TextNodeProperty {
     let color: string | FallbackError<string> | undefined = catchTextNodeColor(node);
     if (color instanceof FallbackError) {
-        console.warn(`TextNode: ${node.name} | ` + color.message);
         if (color.fallbackValue != undefined) {
             color = color.fallbackValue;
         } else {
@@ -182,7 +181,7 @@ function catchTextNodeIsBold(node: TextNode): boolean | FallbackError<boolean> {
         return font.style.toLowerCase() === "bold";
     }
 
-    const error = new FallbackError<boolean>(LogConstant.MIXED_TEXT_NODE);
+    const error = new FallbackError<boolean>(Constant.MIXED_TEXT_NODE);
     font = node.getRangeFontName(0, 1);
     if (typeof font === "object") {
         error.fallbackValue = font.style.toLowerCase() === "bold";
@@ -198,7 +197,7 @@ function catchTextNodeFontSize(node: TextNode): number | FallbackError<number> {
         return size;
     }
 
-    const error = new FallbackError<number>(LogConstant.MIXED_TEXT_NODE);
+    const error = new FallbackError<number>(Constant.MIXED_TEXT_NODE);
     size = node.getRangeFontSize(0, 1);
     if (typeof size === "number") {
         error.fallbackValue = size;

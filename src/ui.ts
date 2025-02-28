@@ -1,6 +1,6 @@
-import LogConstant from "./config/LogConstant";
+import Constant from "./config/Constant";
 
-console.log("Champion Hunter | UI Loading...");
+console.log(Constant.UI_LOADING);
 
 let textarea: HTMLTextAreaElement;
 let copyBtn: HTMLButtonElement;
@@ -8,22 +8,22 @@ let copySelectionButton: HTMLButtonElement;
 let exportList: HTMLElement;
 
 window.onload = (_) => {
-    console.log("Champion Hunter | UI Loaded.");
+    console.log(Constant.UI_LOAD_FINISHED);
     const textareaElement = document.getElementById("previewArea");
     if (textareaElement == null) {
-        console.warn("previewArea not found. Creating a new one.");
+        console.warn(Constant.UI_PREVIEW_AREA_NOT_FOUND);
         textarea = document.createElement("textarea");
         document.body.appendChild(textarea);
     } else {
         textarea = (textareaElement as HTMLTextAreaElement);
     }
-    textarea.placeholder = LogConstant.NO_SELECT_NODE_WARNING;
+    textarea.placeholder = Constant.NO_SELECT_NODE_WARNING;
 
     const copyButtonElement = document.getElementById("copyButton");
     if (copyButtonElement == null) {
-        console.warn("copyButton not found. Creating a new one.");
+        console.warn(Constant.UI_COPY_BUTTON_NOT_FOUND);
         copyBtn = document.createElement("button");
-        copyBtn.innerText = "Copy All to Clipboard";
+        copyBtn.innerText = Constant.UI_TEXT_COPY_ALL;
         document.body.appendChild(copyBtn);
     } else {
         copyBtn = (copyButtonElement as HTMLButtonElement);
@@ -37,9 +37,9 @@ window.onload = (_) => {
 
     const copySelectionButtonElement = document.getElementById("copySelectionButton");
     if (copySelectionButtonElement == null) {
-        console.warn("copySelectionButton not found. Creating a new one.");
+        console.warn(Constant.UI_COPY_SELECTION_BUTTON_NOT_FOUND);
         copySelectionButton = document.createElement("button");
-        copySelectionButton.innerText = "Copy Selection to Clipboard (Ctrl+C)";
+        copySelectionButton.innerText = Constant.UI_TEXT_COPY_SELECTION;
         document.body.appendChild(copySelectionButton);
     } else {
         copySelectionButton = (copySelectionButtonElement as HTMLButtonElement);
@@ -50,7 +50,7 @@ window.onload = (_) => {
 
     const exportListElement = document.getElementById("exportList");
     if (exportListElement == null) {
-        console.warn("exportList not found.");
+        console.warn(Constant.UI_EXPORT_LIST_NOT_FOUND);
     } else {
         exportList = exportListElement;
         exportList.addEventListener("click", (event) => {
@@ -58,10 +58,10 @@ window.onload = (_) => {
                 if (target instanceof HTMLElement && target.classList.contains("export-list-item")) {
                     const index = target.getAttribute("data-index");
                     if (index != null) {
-                        console.log("export-list-item clicked. index:", index);
+                        console.trace(Constant.UI_EXPORT_LIST_ITEM_CLICKED, index);
                         selectLineInTextArea(parseInt(index));
                     } else {
-                        console.log("export-list-item clicked. index not found.");
+                        console.warn(Constant.UI_EXPORT_LIST_ITEM_NOT_FOUND);
                     }
                 }
             },
@@ -73,15 +73,15 @@ window.onmessage = async (event) => {
     const {type, text, itemNameList} = event.data.pluginMessage;
     if (type === "copyToClipboard") {
         try {
+            console.trace(Constant.UI_RENDER_TEXT_AREA, text);
             textarea.value = text;
             if (itemNameList != null && Array.isArray(itemNameList)) {
-                console.log("itemNames found. rendering export list.");
+                console.trace(Constant.UI_RENDER_EXPORT_LIST, itemNameList);
                 renderExportList(itemNameList);
             }
             textarea.select();
-            console.log("textarea selected.");
         } catch (error) {
-            console.error("Failed to copy text:", error);
+            console.error(Constant.UI_ANY_RENDER_FAILED, error);
             postErrorMessage(error);
         }
     }
@@ -97,12 +97,11 @@ function postErrorMessage(message: string | unknown) {
 }
 
 function execCopy(textarea: HTMLTextAreaElement, selectAll: boolean) {
-    if (selectAll) {
-        textarea.select();
-    }
+    if (selectAll) textarea.select();
+
     document.execCommand("copy");
-    console.log("copy command executed. content:");
-    console.log(textarea.value);
+    console.trace(Constant.UI_EXEC_COPY_COMMAND);
+    console.trace(textarea.value);
 }
 
 function renderExportList(items: string[]) {
@@ -111,7 +110,7 @@ function renderExportList(items: string[]) {
             `<div class="export-list-item" data-index="${index}">${item}</div>`,
         ).join("");
     } else {
-        console.warn("exportList not found.");
+        console.warn(Constant.UI_EXPORT_LIST_NOT_FOUND_NO_ALTERNATIVE);
     }
 }
 
@@ -130,10 +129,10 @@ function selectLineInTextArea(index: number) {
     textarea.select();
     textarea.focus();
     if (start === -1) {
-        console.log("clear range.");
+        console.trace(Constant.UI_CLEAR_TEXT_AREA_SELECTION);
         textarea.setSelectionRange(0, 0);
     } else {
-        console.log("set range:", start, ",", end);
+        console.trace(Constant.UI_SET_TEXT_AREA_SELECTION, start, ",", end);
         textarea.setSelectionRange(start, end);
 
         textarea.scrollTop = textarea.scrollHeight * (start / textarea.value.length);

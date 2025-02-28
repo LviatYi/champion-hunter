@@ -5,15 +5,16 @@
 
 // Runs this code if the plugin is run in Figma
 import { hunter } from "./hunter/Hunter";
+import Constant from "./config/Constant";
 
 if (figma.editorType === "figma") {
-    console.log("Hello, world.");
+    console.log(Constant.WELCOME_TO_CHAMPION_HUNTER);
 
     figma.showUI(__html__, {width: 600, height: 400, themeColors: true});
 
     figma.ui.onmessage = (message) => {
         if (message.type === "close-ui") {
-            figma.closePlugin("UI closed, plugin finished.");
+            figma.closePlugin(Constant.PLUGIN_FINISHED_BY_UI_CLOSED);
         }
     };
 
