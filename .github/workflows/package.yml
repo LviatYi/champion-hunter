@@ -27,6 +27,10 @@ jobs:
       - name: Run pack script
         run: npm run pack-only
 
+      - name: Get Version from Tag
+        id: get_version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
+
       - name: Find ZIP File
         id: find_zip
         run: |
