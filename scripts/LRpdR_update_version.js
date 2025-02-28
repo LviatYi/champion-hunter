@@ -17,7 +17,7 @@ if (!match) {
 const version = match[1];
 console.log(`Get version: ${version}`);
 
-const updatedReadmeContent = readmeContent.replace(/v\d+\.\d+\.\d+\s{2}\n/, `v${version}  `);
+const updatedReadmeContent = readmeContent.replace(/v\d+\.\d+\.\d+\s*/, `v${version}  \n`);
 fs.writeFileSync(readmePath, updatedReadmeContent, "utf8");
 
 const packageJsonPath = path.join(__dirname, "../package.json");
@@ -25,5 +25,5 @@ const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, "utf8"));
 packageJson.version = version;
 fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2) + "\n", "utf8");
 
-console.log(`version updated to ${version}`);
+console.log(`Version updated to ${version}`);
 console.log("⡟⠄⣠⡾⠋⣾⠏⠄⢰⣿⠁⠄⠄⣾⡏⠄⠠⠿⠿⠋⠠⠶⠶⠿⠶⠾⠋⠄⠽⠟⠄⠄⠄⠃⠄⠄⣼⣿⣤⡤⠤⠤⠤⠤⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄All Finished | UPD PROJ VER ⠄⠄⠄");
