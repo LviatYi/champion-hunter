@@ -58,7 +58,7 @@ window.onload = (_) => {
                 if (target instanceof HTMLElement && target.classList.contains("export-list-item")) {
                     const index = target.getAttribute("data-index");
                     if (index != null) {
-                        console.trace(Constant.UI_EXPORT_LIST_ITEM_CLICKED, index);
+                        console.log(Constant.UI_EXPORT_LIST_ITEM_CLICKED, index);
                         selectLineInTextArea(parseInt(index));
                     } else {
                         console.warn(Constant.UI_EXPORT_LIST_ITEM_NOT_FOUND);
@@ -73,10 +73,10 @@ window.onmessage = async (event) => {
     const {type, text, itemNameList} = event.data.pluginMessage;
     if (type === "copyToClipboard") {
         try {
-            console.trace(Constant.UI_RENDER_TEXT_AREA, text);
+            console.log(Constant.UI_RENDER_TEXT_AREA, text);
             textarea.value = text;
             if (itemNameList != null && Array.isArray(itemNameList)) {
-                console.trace(Constant.UI_RENDER_EXPORT_LIST, itemNameList);
+                console.log(Constant.UI_RENDER_EXPORT_LIST, itemNameList);
                 renderExportList(itemNameList);
             }
             textarea.select();
@@ -108,8 +108,8 @@ function execCopy(textarea: HTMLTextAreaElement, selectAll: boolean) {
     if (selectAll) textarea.select();
 
     document.execCommand("copy");
-    console.trace(Constant.UI_EXEC_COPY_COMMAND);
-    console.trace(textarea.value);
+    console.log(Constant.UI_EXEC_COPY_COMMAND);
+    console.log(textarea.value);
 }
 
 function renderExportList(items: string[]) {
@@ -137,10 +137,10 @@ function selectLineInTextArea(index: number) {
     textarea.select();
     textarea.focus();
     if (start === -1) {
-        console.trace(Constant.UI_CLEAR_TEXT_AREA_SELECTION);
+        console.log(Constant.UI_CLEAR_TEXT_AREA_SELECTION);
         textarea.setSelectionRange(0, 0);
     } else {
-        console.trace(Constant.UI_SET_TEXT_AREA_SELECTION, start, ",", end);
+        console.log(Constant.UI_SET_TEXT_AREA_SELECTION, start, ",", end);
         textarea.setSelectionRange(start, end);
 
         textarea.scrollTop = textarea.scrollHeight * (start / textarea.value.length);

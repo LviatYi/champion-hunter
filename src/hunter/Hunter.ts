@@ -8,7 +8,7 @@ import Constant from "../config/Constant";
 export function hunter() {
     const currentSelection: ReadonlyArray<SceneNode> = figma.currentPage.selection;
 
-    console.trace(Constant.HUNTER_CURRENT_SELECT_COUNT, currentSelection.length);
+    console.log(Constant.HUNTER_CURRENT_SELECT_COUNT, currentSelection.length);
     console.log(Constant.HUNTER_CURRENT_SELECT, currentSelection);
 
     if (currentSelection.length === 0) {
@@ -17,14 +17,14 @@ export function hunter() {
     }
 
     const targetNodes = selectTargetNodes(currentSelection);
-    console.trace(Constant.HUNTER_SELECT_TARGET_NODE, `${targetNodes.length} targetNodes: ${targetNodes}`);
+    console.log(Constant.HUNTER_SELECT_TARGET_NODE, `${targetNodes.length} targetNodes: ${targetNodes}`);
 
     const propertyObjs = sweepNet(targetNodes);
-    console.trace(Constant.HUNTER_AFTER_SWEEP_NET, `${propertyObjs.length} properties: ${propertyObjs}`);
+    console.log(Constant.HUNTER_AFTER_SWEEP_NET, `${propertyObjs.length} properties: ${propertyObjs}`);
 
     const lineStructures = propertyObjs
         .map(propertyObj => new ExcelLineStruct(propertyObj));
-    lineStructures.forEach(lineStructure => console.trace(lineStructure.toString()));
+    lineStructures.forEach(lineStructure => console.log(lineStructure.toString()));
 
     const content = lineStructures
         .map(struct => struct.toString())
