@@ -25,7 +25,7 @@ jobs:
         run: npm install
 
       - name: Run pack script
-        run: npm run pack-only
+        run: npm run pack
 
       - name: Get Version from Tag
         id: get_version
