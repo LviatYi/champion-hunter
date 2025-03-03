@@ -32,7 +32,7 @@ export function hunter() {
     });
 
     figma.ui.postMessage({
-        type: EventName.UPDATE_USABLE_ITEMS,
+        type: EventName.REFRESH_USABLE_ITEMS,
         data: propertyObjs,
     });
 }

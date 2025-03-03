@@ -122,7 +122,7 @@ window.onload = (_) => {
 
 window.onmessage = async (event) => {
     const {type, data} = event.data.pluginMessage;
-    if (type === EventName.UPDATE_USABLE_ITEMS) {
+    if (type === EventName.REFRESH_USABLE_ITEMS) {
         curItems = (data as NodeProperty[]);
         try {
             console.log(Constant.UI_RENDER_TEXT_AREA, curItems);
@@ -239,5 +239,5 @@ function applyUpdate(type: UpdatableField, index: number, newValue: string) {
     renderExcelExportStr();
 
     console.log(Constant.UI_REPORT_UPDATE);
-    parent.postMessage({pluginMessage: {type: "update", data: {type, index, newValue}}}, "*");
+    parent.postMessage({pluginMessage: {type: EventName.UPDATED_BY_UI, data: {type, index, newValue}}}, "*");
 }

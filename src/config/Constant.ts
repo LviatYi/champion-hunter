@@ -10,7 +10,6 @@ export default class Constant {
     public static readonly UI_EXPORT_LIST_NOT_FOUND = "Champion Hunter | UI | exportList not found. Creating a new one.";
     public static readonly UI_EXPORT_LIST_NOT_FOUND_NO_ALTERNATIVE = "Champion Hunter | UI | exportList not found.";
     public static readonly UI_EXPORT_LIST_ITEM_CLICKED = "Champion Hunter | UI | export-list-item clicked. index:";
-    public static readonly UI_EXPORT_LIST_ITEM_NOT_FOUND = "Champion Hunter | UI | export-list-item clicked. index not found.";
     public static readonly UI_RENDER_TEXT_AREA = "Champion Hunter | UI | got copyToClipboard command. rendering textarea. data: ";
     public static readonly UI_RENDER_EXPORT_LIST = "Champion Hunter | UI | itemNames found. rendering export list. data: ";
     public static readonly UI_ANY_RENDER_FAILED = "Champion Hunter | UI | got copyToClipboard command. but render failed: ";

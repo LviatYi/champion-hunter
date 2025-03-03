@@ -6,6 +6,7 @@
 // Runs this code if the plugin is run in Figma
 import { hunter, UpdatableField, updateField } from "./hunter/Hunter";
 import Constant from "./config/Constant";
+import EventName from "./config/EventName";
 
 if (figma.editorType === "figma") {
     console.log(Constant.WELCOME_TO_CHAMPION_HUNTER);
@@ -15,7 +16,7 @@ if (figma.editorType === "figma") {
     figma.ui.onmessage = (message) => {
         if (message.type === "close-ui") {
             figma.closePlugin(Constant.PLUGIN_FINISHED_BY_UI_CLOSED);
-        } else if (message.type === "update") {
+        } else if (message.type === EventName.UPDATED_BY_UI) {
             console.log(Constant.HUNTER_RECEIVE_UPDATE, message.data);
             const {type, index, newValue} = message.data as { type: UpdatableField, index: number, newValue: string };
             updateField(type, index, newValue);
