@@ -179,13 +179,13 @@ function catchTextNodeColor(node: TextNode): string | FallbackError<string> {
 function catchTextNodeIsBold(node: TextNode): boolean | FallbackError<boolean> {
     let font = node.fontName;
     if (typeof font === "object") {
-        return font.style.toLowerCase() === "bold";
+        return fontStyleIsBold(font.style.toLowerCase());
     }
 
     const error = new FallbackError<boolean>(Constant.MIXED_TEXT_NODE);
     font = node.getRangeFontName(0, 1);
     if (typeof font === "object") {
-        error.fallbackValue = font.style.toLowerCase() === "bold";
+        error.fallbackValue = fontStyleIsBold(font.style.toLowerCase());
         return error;
     }
 
@@ -259,4 +259,11 @@ function figmaColorToHex(color: { r: number, g: number, b: number }): string {
     const hex = (r << 16) | (g << 8) | b;
 
     return `0x${hex.toString(16).padStart(6, "0").toUpperCase()}`;
+}
+
+function fontStyleIsBold(fontStyle: string): boolean {
+    for (const ref of DefaultValueConfig.BOLD_FONT_STYLE_REFERENCE_IN_LOWER_CASE) {
+        if (fontStyle.toLowerCase().includes(ref)) return true;
+    }
+    return false;
 }

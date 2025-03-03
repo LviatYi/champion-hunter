@@ -11,4 +11,6 @@ export class DefaultValueConfig {
     public static readonly FONT_SIZE = 0;
     public static readonly DEFAULT_X = 0;
     public static readonly DEFAULT_Y = 0;
+
+    public static readonly BOLD_FONT_STYLE_REFERENCE_IN_LOWER_CASE = ["bold", "heavy"];
 }
