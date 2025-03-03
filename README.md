@@ -15,7 +15,7 @@ align="right"
 通过深度打通设计工具链路，实现工程资产数据的智能化解析与重组。  
 最终赋能 UX 团队在跨平台交付场景中实现沉浸式采样体验与一键式可视化智控导出，优化整体工作流体验，完成从设计价值挖掘到工程效能转化的闭环。
 
-v0.8.5  
+v0.8.6  
 by [LviatYi](mailto:LviatYi@foxmail.com)
 
 阅读该文档时，推荐安装以下字体：
@@ -30,7 +30,10 @@ by [LviatYi](mailto:LviatYi@foxmail.com)
 ### Unreleased
 
 - [ ] **FEAT** 补全文档，添加教程信息。
-- [ ] **FEAT** 推断 Heavy 字体为粗体。
+
+### v0.8.6
+
+- **FEAT** 推断 Heavy 字体为粗体。
 
 ### v0.8.5
 
