@@ -15,7 +15,7 @@ align="right"
 通过深度打通设计工具链路，实现工程资产数据的智能化解析与重组。  
 最终赋能 UX 团队在跨平台交付场景中实现沉浸式采样体验与一键式可视化智控导出，优化整体工作流体验，完成从设计价值挖掘到工程效能转化的闭环。
 
-v0.8.6  
+v0.8.7  
 by [LviatYi](mailto:LviatYi@foxmail.com)
 
 阅读该文档时，推荐安装以下字体：
@@ -27,9 +27,11 @@ by [LviatYi](mailto:LviatYi@foxmail.com)
 
 ## ChangeLog ⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠐⠒⠒⠒⠒⠚⠛⣿⡟⠄⠄⢠⠄⠄⠄⡄⠄⠄⣠⡶⠶⣶⠶⠶⠂⣠⣶⣶⠂⠄⣸⡿⠄⠄⢀⣿⠇⠄⣰⡿⣠⡾⠋⠄⣼⡟⠄⣠⡾⠋⣾⠏⠄⢰⣿⠁⠄⠄⣾⡏⠄⠠⠿⠿⠋⠠⠶⠶⠿⠶⠾⠋⠄⠽⠟⠄⠄⠄⠃⠄⠄⣼⣿⣤⡤⠤⠤⠤⠤⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄
 
-### Unreleased
+[//]: # (### Unreleased)
 
-- [ ] **FEAT** 补全文档，添加教程信息。
+### v0.8.7
+
+- **FEAT** 补全文档，添加教程信息。
 
 ### v0.8.6
 
@@ -139,7 +141,8 @@ by [LviatYi](mailto:LviatYi@foxmail.com)
     - 所有控件的 y 坐标将在导出时减去这个值。在 `code.js` 中搜索 `TOP_BAR_HEIGHT`
         - `TOP_BAR_HEIGHT=65` 修改此处的 65 为你想要的值。
 - **粗体字辨识要素** default `["bold","heavy"]`
-    - 判断 TextNode 是一个粗体文本的条件是：字体样式名包含 "bold" 或 "heavy"。在 `code.js` 中搜索 `BOLD_FONT_STYLE_REFERENCE_IN_LOWER_CASE`
+    - 判断 TextNode 是一个粗体文本的条件是：字体样式名包含 "bold" 或 "heavy"。在 `code.js` 中搜索
+      `BOLD_FONT_STYLE_REFERENCE_IN_LOWER_CASE`
         - `BOLD_FONT_STYLE_REFERENCE_IN_LOWER_CASE=["bold","heavy"]` 添加可表示为粗体的要素（全小写），如改为：
           `BOLD_FONT_STYLE_REFERENCE_IN_LOWER_CASE=["bold","heavy","xxl"]`
 

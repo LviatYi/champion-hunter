@@ -1,6 +1,6 @@
 {
   "name": "champion-hunter",
-  "version": "0.8.6",
+  "version": "0.8.7",
   "description": "An intelligent asset governance solution for the Figma ecosystem.",
   "main": "./dist/code.js",
   "scripts": {
