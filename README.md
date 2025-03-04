@@ -73,19 +73,92 @@ by [LviatYi](mailto:LviatYi@foxmail.com)
 
 ### Installation
 
-- [推荐] 从 Figma 插件商店安装
+- _[⭐推荐]_ 方法一 从 Figma 插件商店下载安装
   ![install_from_ea_store](https://raw.githubusercontent.com/LviatYi/champion-hunter/refs/heads/main/pic/install_from_ea_store.png)
-- 从 Github 下载 [最新版本][path_to_repo_release]。
+- 方法二 从 Github 下载 [最新版本][path_to_repo_release]。
     1. 解压下载的压缩包。
     2. ![import_from_manifest](https://raw.githubusercontent.com/LviatYi/champion-hunter/refs/heads/main/pic/import_from_manifest.png)
     3. 选择解压文件夹下的
-       manifest.json![select_manifest](https://raw.githubusercontent.com/LviatYi/champion-hunter/refs/heads/main/pic/select_manifest.png)
+       manifest.json，完成安装。![select_manifest](https://raw.githubusercontent.com/LviatYi/champion-hunter/refs/heads/main/pic/select_manifest.png)
+
+---
+
+### Hunt
+
+选取要导出的节点，随后右键并运行 Champion-Hunter 插件。
+
+![hunt01](https://raw.githubusercontent.com/LviatYi/champion-hunter/refs/heads/main/pic/hunt01.png)
+
+- 支持导出的节点有：
+    - ![node-group](https://raw.githubusercontent.com/LviatYi/champion-hunter/refs/heads/main/pic/node-group.png)
+      **组合节点**
+    - ![node-rectangle](https://raw.githubusercontent.com/LviatYi/champion-hunter/refs/heads/main/pic/node-rectangle.png)
+      **图片节点**
+    - ![node-text](https://raw.githubusercontent.com/LviatYi/champion-hunter/refs/heads/main/pic/node-text.png)
+      **文本节点**
+    - ![node-frame](https://raw.githubusercontent.com/LviatYi/champion-hunter/refs/heads/main/pic/node-frame.png)
+      **框架节点**
+    - ![node-instance](https://raw.githubusercontent.com/LviatYi/champion-hunter/refs/heads/main/pic/node-instance.png)
+      **实例节点**
+- 当选择 **组合节点** 时，其下所有 **可见** 的有效节点（组合节点、图片节点、文本节点、框架节点、实例节点）均会被导出。不可见节点将被忽略。
+- 当手动选择节点时，即便 **不可见**，自身也将被导出。
+
+---
+
+### Export
+
+![hunt02](https://raw.githubusercontent.com/LviatYi/champion-hunter/refs/heads/main/pic/hunt02.png)
+
+导出之前：
+
+- 你可以重选节点，Champion Hunter 窗口将即时刷新。
+- 可以修改节点的 Name 或 Text 属性。修改将同步应用回 figma 工程。
+    - 建议在该窗口中谨慎修改 Text 属性，可能有来自 Figma 自身限制导致的非预期的问题，如：当环境不存在字体时，Figma
+      工程不允许修改文本内容。
+
+导出可用：
+
+- 点击 **Copy Selection to Clipboard**。这将导出 左侧 **预览界面** 代表的单行数据。
+- 点击 **Copy All to Clipboard**。这将导出 右侧 **节点选择界面** 包含的所有已选有效节点。
+
+你可以回到正在工作的 Excel（这个 Excel 应满足 Champion 的数据格式要求）。选择一个空行的最左侧（多选时，这个空行之下最好保留足够的空间），粘贴数据，即可完成导出。
+
+---
+
+### Configuration
+
+遗憾的是，收到 Figma 插件环境限制，Champion Hunter 不能够读写一个配置文件。因此一些应该被配置的参数，只能通过代码来修改。
+
+假如你非常急迫地需要配置修改立刻生效，你需要使用 Installation 章指明的 **方法二** 来安装插件。然后，你可以在解压根目录找到
+`dist/code.js` 文件。  
+打开它，随后你可以搜索感兴趣的参数并修改。
+
+可以修改的配置项：
+
+- **TopBar 高度** default `65`
+    - 所有控件的 y 坐标将在导出时减去这个值。在 `code.js` 中搜索 `TOP_BAR_HEIGHT`
+        - `TOP_BAR_HEIGHT=65` 修改此处的 65 为你想要的值。
+- **粗体字辨识要素** default `["bold","heavy"]`
+    - 判断 TextNode 是一个粗体文本的条件是：字体样式名包含 "bold" 或 "heavy"。在 `code.js` 中搜索 `BOLD_FONT_STYLE_REFERENCE_IN_LOWER_CASE`
+        - `BOLD_FONT_STYLE_REFERENCE_IN_LOWER_CASE=["bold","heavy"]` 添加可表示为粗体的要素（全小写），如改为：
+          `BOLD_FONT_STYLE_REFERENCE_IN_LOWER_CASE=["bold","heavy","xxl"]`
+
+---
+
+### Best Practice
+
+- **建议** Figma 工程内的节点名称应符合规范，它最好通过一定的规则来保证唯一性。
+- **可以** 通过节点的可见性来控制导出的节点。
+- 如果有任何可以改进工作流的地方，或者遇到了问题，**可以** 去 [这里][path_to_repo_issue] 点击 **New issue** 汇报。
+- 如果认为 **Champion Hunter** 对你的工作有帮助，请给一个 [star][path_to_repo]。
 
 ---
 
 [path_to_repo]:https://github.com/LviatYi/champion-hunter
 
 [path_to_repo_release]:https://github.com/LviatYi/champion-hunter/releases
+
+[path_to_repo_issue]: https://github.com/LviatYi/champion-hunter/issues
 
 [JetbrainsMonoNerdFont]:https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/JetBrainsMono.zip@fallbackFont
 
